@@ -1,0 +1,30 @@
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#libros{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#genero{
+    margin: 5rem;
+}
+
+.libroInfo{
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    padding: 2%;
+    border: solid 1px white;
+    margin: 2%;
+}
+
+.venta{
+    display: flex;    
+}
