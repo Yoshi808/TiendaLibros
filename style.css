@@ -37,3 +37,7 @@ main{
   -ms-filter: blur(2px);
   filter: blur(2px);
 }
+
+.btn-link{
+    text-decoration: none;
+}
