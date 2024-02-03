@@ -38,6 +38,8 @@ main{
   filter: blur(2px);
 }
 
-.btn-link{
-    text-decoration: none;
+@media (max-width: 768px) {
+    #botonModal{
+        padding: 0px;
+    }
 }
