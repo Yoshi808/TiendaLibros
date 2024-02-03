@@ -20,7 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             data.items.forEach(libro => {
                 const listaLibros = document.createElement('div');
-                listaLibros.classList.add('libroInfo')
+                listaLibros.classList.add('libroInfo');
+                listaLibros.classList.add('border');
+                listaLibros.classList.add('border-3');
+                listaLibros.classList.add('border-secondary')
                 listaLibros.innerHTML = libro.saleInfo.listPrice ? `
                 <h2>${libro.volumeInfo.title}</h2>
                 <img src="${libro.volumeInfo.imageLinks.thumbnail}">

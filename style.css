@@ -21,7 +21,6 @@ main{
     align-items: center;
     width: 80%;
     padding: 2%;
-    border: solid 1px white;
     margin: 2%;
 }
 
@@ -30,7 +29,8 @@ main{
 }
 
 .modal-open header,
-.modal-open main {
+.modal-open main,
+.modal-open footer {
   -webkit-filter: blur(2px);
   -moz-filter: blur(2px);
   -o-filter: blur(2px);
@@ -42,4 +42,10 @@ main{
     #botonModal{
         padding: 0px;
     }
+}
+
+.bd-footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
