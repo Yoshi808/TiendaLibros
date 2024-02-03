@@ -19,7 +19,7 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 50%;
+    width: 80%;
     padding: 2%;
     border: solid 1px white;
     margin: 2%;
@@ -27,4 +27,13 @@ main{
 
 .venta{
     display: flex;    
+}
+
+.modal-open .container-fluid,
+.modal-open .container {
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
 }
