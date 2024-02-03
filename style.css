@@ -29,8 +29,8 @@ main{
     display: flex;    
 }
 
-.modal-open .container-fluid,
-.modal-open .container {
+.modal-open header,
+.modal-open main {
   -webkit-filter: blur(2px);
   -moz-filter: blur(2px);
   -o-filter: blur(2px);
