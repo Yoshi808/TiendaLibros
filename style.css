@@ -38,7 +38,7 @@ main{
   filter: blur(2px);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
     #botonModal{
         padding: 0px;
     }
