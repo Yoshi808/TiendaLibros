@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const carritoHTML = localStorage.getItem(carritoKey);
     const libros = document.getElementById('libros');
     const carrito = document.getElementById('carrito');
-    // const montoActual = document.getElementById('montoActual');
+    const montoActual = document.getElementById('montoActual');
     carrito.innerHTML = carritoHTML;
     const searchForm = document.getElementById('searchForm');
     const genero = document.getElementById('genero');
@@ -19,10 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const maxResults = 20;
     const botonModal = document.getElementById('botonModal');
+    // Actualizar el monto total
+    actualizarMontoTotal();
 
-    botonModal.addEventListener('click', () => quitarElemento())
+    botonModal.addEventListener('click', quitarElemento())
     
-
 
     function quitarElemento() {
         const removeFromCartButtons = document.querySelectorAll('.removeFromCart');
@@ -35,6 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Actualizar el contenido del carrito en LocalStorage
                     const carritoInnerHTML = carrito.innerHTML;
                     localStorage.setItem(carritoKey, carritoInnerHTML);
+
+                    // Actualizar el monto total
+                    actualizarMontoTotal();
                 });
     });
     }
@@ -104,13 +108,30 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Guardamos un valor en LocalStorage
                     const carritoInnerHTML = carrito.innerHTML;
                     localStorage.setItem(carritoKey, carritoInnerHTML);
+
+                    // Actualizar el monto total
+                    actualizarMontoTotal();
                 });
             });
+
+            // Actualizar el monto total al cargar los libros
+            actualizarMontoTotal();
 
         })
         .catch(error => {
             libros.innerHTML = `Error: ${error}`
             console.error('Error: ', error);
         });
+    }
+
+    // Función para actualizar el monto total
+    function actualizarMontoTotal() {
+        const precios = document.querySelectorAll('#carrito .border h5'); // Obtener todos los precios de los libros en el carrito
+        let total = 0;
+        precios.forEach(precio => {
+            const precioTexto = precio.textContent.replace('Precio: S/', ''); // Eliminar el texto 'Precio: S/' para obtener solo el número
+            total += parseFloat(precioTexto); // Sumar el precio al total
+        });
+        montoActual.textContent = `Monto Actual: S/${total.toFixed(2)}`; // Mostrar el total en el elemento 'montoActual'
     }
 })
