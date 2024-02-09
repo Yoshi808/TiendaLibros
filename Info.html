@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Info.css">
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.17.0/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="shortcut icon" href="https://img.freepik.com/vector-premium/concepto-diseno-logotipo-tienda-libros-linea_556845-463.jpg">
@@ -19,6 +19,9 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarTogglerDemo02">                                  
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
+                  </li>
                   <li class="nav-item">
                     <button type="button" class="btn btn-link" id="botonModal" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#exampleModal">
                       <a class="nav-link p-0" href="#">
@@ -76,10 +79,6 @@
                       </ul>
                   </li>
                 </ul>
-                <form class="d-flex m-2" id="searchForm" role="search">
-                    <input  id="busqueda" class="form-control me-2" type="search" placeholder="Buscar por género" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Buscar</button>
-                  </form>
               </div>
             </div>
           </nav>
@@ -104,17 +103,7 @@
       </div>
     </div>
     <main>
-        <div class="container welcome">
-          <div class="row">
-              <div class="col-md-8 offset-md-2 text-center">
-                  <h1>Bienvenido a la Tienda de Libros</h1>
-                  <p>Descubre un mundo de conocimiento con nuestra amplia selección de libros para todos los gustos y edades. En nuestra tienda, encontrarás desde los bestsellers más populares hasta joyas literarias poco conocidas.</p>
-                  <p>Explora nuestro catálogo y encuentra tu próxima lectura favorita. ¿Necesitas ayuda para encontrar algo en particular? ¡Utiliza nuestro formulario de búsqueda y te ayudaremos a encontrarlo!</p>
-              </div>
-          </div>
-        </div>
-        <h2 id="genero"></h2>
-        <div id="libros"></div>
+        <div id="libro" class="libroInfo border border-3 border-secondary"></div>
     </main>
     <footer class="bd-footer p-3 bg-body-tertiary fixed-bottom">
       <h4>
@@ -125,7 +114,7 @@
       </h4>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
     <script src="changeTheme.js"></script>
+    <script src="Info.js"></script>
 </body>
 </html>

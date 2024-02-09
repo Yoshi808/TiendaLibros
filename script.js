@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const input = document.getElementById('busqueda');
         event.preventDefault();
         const busqueda = input.value.trim();
-        genero.textContent = `${busqueda}:`
+        genero.textContent = `${busqueda} (Click en las imágenes de los libros para ver su descripción):`
         libros.innerHTML = '';
         getBooks(busqueda);
     })
@@ -55,24 +55,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 listaLibros.classList.add('border-3');
                 listaLibros.classList.add('border-secondary');
                 listaLibros.innerHTML = libro.saleInfo.listPrice ? `
-                    <h2>${libro.volumeInfo.title}</h2>
-                    <img src="${libro.volumeInfo.imageLinks ? libro.volumeInfo.imageLinks.thumbnail : 'ruta_por_defecto'}">
+                    <h3>${libro.volumeInfo.title}</h3>
+                    <a class="imageLink" href="info.html"><img src="${libro.volumeInfo.imageLinks ? libro.volumeInfo.imageLinks.thumbnail : 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTMVlVIwSSng1xnNT7GR_c91cjMKxlfVhwFuo_Z-tUw2en6u5Rg'}"></a>
                     <h4>Autores: ${libro.volumeInfo.authors ? libro.volumeInfo.authors : 'Desconocidos'} (${libro.volumeInfo.publishedDate ? libro.volumeInfo.publishedDate : 'Fecha desconocida'})</h4>
-                    ${libro.volumeInfo.description || libro.volumeInfo.subtitle ? `<p><strong>Descripción: </strong>${libro.volumeInfo.description || libro.volumeInfo.subtitle}</p>` : ''}
+                    ${libro.volumeInfo.description || libro.volumeInfo.subtitle ? `<p style="display: none"><strong>Descripción: </strong>${libro.volumeInfo.description || libro.volumeInfo.subtitle}</p>` : ''}
                     <div class="venta">
                     <h5 style="margin: 10%">Precio: S/${libro.saleInfo.listPrice.amount}</h5>
                         <button class="btn btn-outline-success addToCart" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16"> <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z"/> <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg> Añadir al carrito</button>
                     </div>
                     ` : `
                     <h2>${libro.volumeInfo.title}</h2>
-                    <img src="${libro.volumeInfo.imageLinks ? libro.volumeInfo.imageLinks.thumbnail : 'ruta_por_defecto'}">
+                    <a class="imageLink" href="info.html"><img src="${libro.volumeInfo.imageLinks ? libro.volumeInfo.imageLinks.thumbnail : 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTMVlVIwSSng1xnNT7GR_c91cjMKxlfVhwFuo_Z-tUw2en6u5Rg'}"></a>
                     <h4>Autores: ${libro.volumeInfo.authors ? libro.volumeInfo.authors : 'Desconocidos'} (${libro.volumeInfo.publishedDate ? libro.volumeInfo.publishedDate : 'Fecha desconocida'})</h4>
-                    ${libro.volumeInfo.description || libro.volumeInfo.subtitle ? `<p><strong>Descripción: </strong>${libro.volumeInfo.description || libro.volumeInfo.subtitle}</p>` : ''}
+                    ${libro.volumeInfo.description || libro.volumeInfo.subtitle ? `<p style="display: none"><strong>Descripción: </strong>${libro.volumeInfo.description || libro.volumeInfo.subtitle}</p>` : ''}
                     <div class="venta">
                     <h5 style="margin: 10%">Agotado</h5>
                         <button class="btn btn-danger addToCart" disabled type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16"> <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z"/> <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg> Añadir al carrito</button>
                     </div>
                 `;
+                const imageLink = document.querySelectorAll('.imageLink');
+                imageLink.forEach(image => {
+                    image.addEventListener('click', () => {
+                        const libro = image.closest('.libroInfo');
+                        localStorage.setItem('Info', libro.innerHTML);
+                    });
+                });
+                
+                
                 libros.appendChild(listaLibros);
             });
             const addToCartButtons = document.querySelectorAll('.addToCart');
