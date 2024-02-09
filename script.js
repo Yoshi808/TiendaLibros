@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Actualizar el monto total
     actualizarMontoTotal();
 
-    botonModal.addEventListener('click', quitarElemento())
+    botonModal.addEventListener('click', quitarElemento());
     
 
     function quitarElemento() {
