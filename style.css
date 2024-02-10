@@ -54,6 +54,11 @@ main{
         margin-bottom: 110rem;
     }
 }
+@media (max-width: 420px) {
+    main{
+        padding: 100%;
+    }
+}
 
 .bd-footer{
     display: flex;
