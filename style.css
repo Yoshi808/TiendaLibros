@@ -10,7 +10,7 @@ main{
     height: 100%;
     display: grid;  
     grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
-    gap: 1%;
+    gap: 2rem;
     padding: 5%;
     margin-bottom: 30rem;
 }
@@ -54,9 +54,12 @@ main{
         margin-bottom: 110rem;
     }
 }
-@media (max-width: 420px) {
-    main{
-        padding: 100%;
+@media (max-width: 450px) {
+    .libroInfo{
+        transform: scale(0.5);
+    }
+    #genero{
+        transform: scale(0.7);
     }
 }
 

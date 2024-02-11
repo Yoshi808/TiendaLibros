@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     const addToCartButton = document.querySelector('.addToCart');
             addToCartButton.addEventListener('click', () => {
                     const libro = addToCartButton.closest('.libroInfo'); // Obtener el elemento padre .libroInfo
-                    const titulo = libro.querySelector('h2').textContent;
+                    const titulo = libro.querySelector('h3').textContent;
                     const imagenSrc = libro.querySelector('img').src;
                     const precio = libro.querySelector('h5').textContent;
                     
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () =>{
                     libroCarrito.classList.add('flex-column');
                     libroCarrito.classList.add('align-items-center');
                     libroCarrito.innerHTML = `
-                        <h2>${titulo}</h2>
+                        <h3>${titulo}</h3>
                         <img src="${imagenSrc}">
                         <h5 style="margin: 10%">${precio}</h5>
                         <button type="button" class="btn btn-secondary removeFromCart">
