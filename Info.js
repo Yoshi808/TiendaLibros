@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     const addToCartButton = document.querySelector('.addToCart');
             addToCartButton.addEventListener('click', () => {
                     const libro = addToCartButton.closest('.libroInfo'); // Obtener el elemento padre .libroInfo
-                    const titulo = libro.querySelector('h3').textContent;
+                    const titulo = libro.querySelector('.titulo').textContent;
                     const imagenSrc = libro.querySelector('img').src;
                     const precio = libro.querySelector('h5').textContent;
                     

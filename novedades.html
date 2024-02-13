@@ -20,6 +20,9 @@
               <div class="collapse navbar-collapse" id="navbarTogglerDemo02">                                  
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
+                  </li>
+                  <li class="nav-item">
                     <button type="button" class="btn btn-link" id="botonModal" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#exampleModal">
                       <a class="nav-link p-0" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
@@ -77,8 +80,8 @@
                   </li>
                 </ul>
                 <form class="d-flex m-2" id="searchForm" role="search">
-                    <input  id="busqueda" class="form-control me-2" type="search" placeholder="Buscar libro" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                  <input  id="busqueda" class="form-control me-2" type="search" placeholder="Buscar libro" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">Buscar</button>
                 </form>
               </div>
             </div>
@@ -95,7 +98,7 @@
           <div class="modal-body" id="carrito">
             ...
           </div>
-          <div class="modal-footer" id="carritoFooter">
+          <div class="modal-footer">
             <h5 id="montoActual"></h5>
             <a href="https://api.mocki.io/v1/b0435d6e"><button type="button" class="btn btn-primary" data-bs-dismiss="modal">Finalizar Compra</button></a>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -104,19 +107,10 @@
       </div>
     </div>
     <main>
-        <div class="container welcome">
-          <div class="row">
-              <div class="col-md-8 offset-md-2 text-center">
-                  <h1>Bienvenido a la Tienda de Libros</h1>
-                  <p>Descubre un mundo de conocimiento con nuestra amplia selección de libros para todos los gustos y edades. En nuestra tienda, encontrarás desde los bestsellers más populares hasta joyas literarias poco conocidas.</p>
-                  <p>Explora nuestro catálogo y encuentra tu próxima lectura favorita. ¿Necesitas ayuda para encontrar algo en particular? ¡Utiliza nuestro formulario de búsqueda y te ayudaremos a encontrarlo (El formulario se encuentra en la barra de navegación)!</p>
-              </div>
-          </div>
-        </div>
-        <h2 id="genero"></h2>
+        <h1 id="genero" style="margin-top: 5rem;">Chat GPT (Click en las imágenes de los libros para ver su descripción):</h1>
         <div id="libros"></div>
     </main>
-    <footer class="bd-footer p-3 bg-body-tertiary fixed-bottom">
+    <footer class="bd-footer py-3 bg-body-tertiary fixed-bottom">
       <h4>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-c-circle" viewBox="0 0 16 16">
           <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.146 4.992c-1.212 0-1.927.92-1.927 2.502v1.06c0 1.571.703 2.462 1.927 2.462.979 0 1.641-.586 1.729-1.418h1.295v.093c-.1 1.448-1.354 2.467-3.03 2.467-2.091 0-3.269-1.336-3.269-3.603V7.482c0-2.261 1.201-3.638 3.27-3.638 1.681 0 2.935 1.054 3.029 2.572v.088H9.875c-.088-.879-.768-1.512-1.729-1.512"/>
@@ -124,8 +118,11 @@
         Salvador Cañizalez - 2024
       </h4>
     </footer>
+
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script src="novedades.js"></script>
     <script src="changeTheme.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
