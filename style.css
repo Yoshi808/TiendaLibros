@@ -12,6 +12,7 @@ img{
 }
 
 .lang{
+    padding: 2%;
     text-decoration: none;
     margin: 1rem;
     width: 20%;
@@ -32,4 +33,10 @@ img{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media (max-width: 450px) {
+    img{
+        transform: scale(0.7);
+    }
 }
