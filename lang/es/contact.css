@@ -1,0 +1,49 @@
+main{
+    padding: 5%;
+}
+
+#libros{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#genero{
+    margin: 5rem;
+}
+
+.libroInfo{
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    padding: 2%;
+    margin: 2%;
+}
+
+.venta{
+    display: flex;    
+}
+
+.modal-open header,
+.modal-open main,
+.modal-open footer {
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+}
+
+@media (max-width: 1000px) {
+    #botonModal{
+        padding: 0px;
+    }
+}
+
+.bd-footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

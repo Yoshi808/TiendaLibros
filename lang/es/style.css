@@ -1,0 +1,70 @@
+main{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2%;
+}
+
+#libros{
+    height: 100%;
+    display: grid;  
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 2rem;
+    padding: 5%;
+    margin-bottom: 30rem;
+}
+
+.welcome{
+    margin: 5rem;
+}
+
+.libroInfo{
+    height: 100%;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+}
+
+.venta{
+    display: flex;    
+}
+
+.modal-open header,
+.modal-open main,
+.modal-open footer {
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+}
+
+@media (max-width: 1000px) {
+    #botonModal{
+        padding: 0px;
+    }
+}
+
+@media (max-width: 920px) {
+    #libros{
+        margin-bottom: 110rem;
+    }
+}
+@media (max-width: 450px) {
+    .libroInfo{
+        transform: scale(0.5);
+    }
+    #genero{
+        transform: scale(0.7);
+    }
+}
+
+.bd-footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

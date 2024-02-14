@@ -1,0 +1,35 @@
+main{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2%;
+}
+
+
+img{
+    width: 5rem;
+}
+
+.lang{
+    text-decoration: none;
+    margin: 1rem;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.languages{
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.bd-footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
