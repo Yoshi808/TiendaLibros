@@ -35,6 +35,8 @@ document.addEventListener('DOMContentLoaded', () =>{
                     libroCarrito.classList.add('d-flex');
                     libroCarrito.classList.add('flex-column');
                     libroCarrito.classList.add('align-items-center');
+                    libroCarrito.classList.add('rounded');
+                    libroCarrito.classList.add('shadow');
                     libroCarrito.innerHTML = `
                         <h3>${titulo}</h3>
                         <img src="${imagenSrc}">

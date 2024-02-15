@@ -54,6 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 listaLibros.classList.add('border');
                 listaLibros.classList.add('border-3');
                 listaLibros.classList.add('border-secondary');
+                listaLibros.classList.add('rounded');
+                listaLibros.classList.add('shadow');
                 listaLibros.innerHTML = libro.saleInfo.listPrice ? `
                     <h3 class="titulo">${libro.volumeInfo.title}</h3>
                     <a class="imageLink" href="info.html"><img src="${libro.volumeInfo.imageLinks ? libro.volumeInfo.imageLinks.thumbnail : 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTMVlVIwSSng1xnNT7GR_c91cjMKxlfVhwFuo_Z-tUw2en6u5Rg'}"></a>
@@ -101,6 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     libroCarrito.classList.add('d-flex');
                     libroCarrito.classList.add('flex-column');
                     libroCarrito.classList.add('align-items-center');
+                    libroCarrito.classList.add('rounded');
+                    libroCarrito.classList.add('shadow');
                     libroCarrito.innerHTML = `
                         <h3>${titulo}</h3>
                         <img src="${imagenSrc}">
