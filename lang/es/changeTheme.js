@@ -14,34 +14,49 @@ const autoIcon = `
 
 const dropdownIcon = document.getElementById('dropdownIcon');
 
+// Función para establecer el tema y actualizar el icono
+function setTheme(theme) {
+    if (theme === 'light') {
+        document.documentElement.setAttribute('data-bs-theme', 'light');
+        dropdownIcon.innerHTML = lightIcon;
+    } else if (theme === 'dark') {
+        document.documentElement.setAttribute('data-bs-theme', 'dark');
+        dropdownIcon.innerHTML = darkIcon;
+    } else {
+        document.documentElement.removeAttribute('data-bs-theme');
+        dropdownIcon.innerHTML = autoIcon;
+    }
+}
 
 document.addEventListener('DOMContentLoaded', function() {
-    dropdownIcon.innerHTML = darkIcon;
+    // Obtiene el tema del localStorage
+    const savedTheme = localStorage.getItem('theme');
+
+    // Si hay un tema guardado, lo establece
+    if (savedTheme) {
+        setTheme(savedTheme);
+    } else {
+        // De lo contrario, establece el tema oscuro como predeterminado
+        setTheme('dark');
+    }
 
     const themeButtons = document.querySelectorAll('[data-bs-theme-value]');
 
     themeButtons.forEach(button => {
         button.addEventListener('click', function() {
-            // Remover la clase 'active' de todos los botones
             themeButtons.forEach(btn => {
                 btn.classList.remove('active');
             });
 
-            // Agregar la clase 'active' al botón clickeado
             this.classList.add('active');
 
             const theme = this.getAttribute('data-bs-theme-value');
 
-            if (theme === 'light') {
-                document.documentElement.setAttribute('data-bs-theme', 'light');
-                dropdownIcon.innerHTML = lightIcon;
-            } else if (theme === 'dark') {
-                document.documentElement.setAttribute('data-bs-theme', 'dark');
-                dropdownIcon.innerHTML = darkIcon;
-            } else {
-                document.documentElement.removeAttribute('data-bs-theme');
-                dropdownIcon.innerHTML = autoIcon;
-            }
+            // Guarda el tema seleccionado en el localStorage
+            localStorage.setItem('theme', theme);
+
+            // Establece el tema y actualiza el icono
+            setTheme(theme);
         });
     });
 });
