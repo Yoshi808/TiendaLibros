@@ -6,6 +6,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const carrito = document.getElementById('carrito');
     const montoActual = document.getElementById('montoActual');
     carrito.innerHTML = carritoHTML;
+    let cantidadCarrito = carrito.children.length;
+    const cantidadCarritoHTML = document.querySelector('.cantidadCarrito');
+    console.log(cantidadCarritoHTML);
+    if (cantidadCarrito == 0) {
+        cantidadCarritoHTML.style.display = 'none';
+    } else {
+        cantidadCarritoHTML.style.display = 'block';
+        cantidadCarritoHTML.textContent = cantidadCarrito;
+    }
+    console.log(cantidadCarrito);
     const searchForm = document.getElementById('searchForm');
     const genero = document.getElementById('genero');
     searchForm.addEventListener('submit', (event) => {
@@ -36,6 +46,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Actualizar el contenido del carrito en LocalStorage
                     const carritoInnerHTML = carrito.innerHTML;
                     localStorage.setItem(carritoKey, carritoInnerHTML);
+
+                    cantidadCarrito-=1;
+                    if (cantidadCarrito == 0) {
+                        cantidadCarritoHTML.style.display = 'none';
+                    } else {
+                        cantidadCarritoHTML.style.display = 'block';
+                        cantidadCarritoHTML.textContent = cantidadCarrito;
+                    }
 
                     // Actualizar el monto total
                     actualizarMontoTotal();
@@ -118,6 +136,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     `;
                     carrito.appendChild(libroCarrito);
                     alert(`Product added to cart successfully`);
+
+                    cantidadCarrito++;
+                    if (cantidadCarrito == 0) {
+                        cantidadCarritoHTML.style.display = 'none';
+                    } else {
+                        cantidadCarritoHTML.style.display = 'block';
+                        cantidadCarritoHTML.textContent = cantidadCarrito;
+                    }
+
                     // Guardamos un valor en LocalStorage
                     const carritoInnerHTML = carrito.innerHTML;
                     localStorage.setItem(carritoKey, carritoInnerHTML);

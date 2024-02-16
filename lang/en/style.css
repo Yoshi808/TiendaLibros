@@ -15,6 +15,24 @@ main{
     margin-bottom: 30rem;
 }
 
+.cantidadCarrito{
+    padding: 2%;
+    font-size: small;
+    color: white;
+    text-align: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    top: -2px;
+    left: 3px;
+    position: relative;
+    background: #e41c1c;
+}
+
 .welcome{
     margin: 5rem;
 }

@@ -5,6 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const libros = document.getElementById('libros');
     const carrito = document.getElementById('carrito');
     carrito.innerHTML = carritoHTML;
+    let cantidadCarrito = carrito.children.length;
+    const cantidadCarritoHTML = document.querySelector('.cantidadCarrito');
+    console.log(cantidadCarritoHTML);
+    if (cantidadCarrito == 0) {
+        cantidadCarritoHTML.style.display = 'none';
+    } else {
+        cantidadCarritoHTML.style.display = 'block';
+        cantidadCarritoHTML.textContent = cantidadCarrito;
+    }
     const maxResults = 20;
     const botonModal = document.getElementById('botonModal');
 
@@ -101,6 +110,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     `;
                     carrito.appendChild(libroCarrito);
                     alert(`Product added to cart successfully`);
+                    cantidadCarrito++;
+                    if (cantidadCarrito == 0) {
+                        cantidadCarritoHTML.style.display = 'none';
+                    } else {
+                        cantidadCarritoHTML.style.display = 'block';
+                        cantidadCarritoHTML.textContent = cantidadCarrito;
+                    }
                     // Guardamos un valor en LocalStorage
                     const carritoInnerHTML = carrito.innerHTML;
                     localStorage.setItem(carritoKey, carritoInnerHTML);

@@ -5,6 +5,16 @@ document.addEventListener('DOMContentLoaded', () =>{
     const carrito = document.getElementById('carrito');
     const montoActual = document.getElementById('montoActual');
     carrito.innerHTML = carritoHTML;
+    let cantidadCarrito = carrito.children.length;
+    const cantidadCarritoHTML = document.querySelector('.cantidadCarrito');
+    console.log(cantidadCarritoHTML);
+    if (cantidadCarrito == 0) {
+        cantidadCarritoHTML.style.display = 'none';
+    } else {
+        cantidadCarritoHTML.style.display = 'block';
+        cantidadCarritoHTML.textContent = cantidadCarrito;
+    }
+    console.log(cantidadCarrito);
     const botonModal = document.getElementById('botonModal');
     // Actualizar el monto total
     actualizarMontoTotal();
@@ -53,6 +63,14 @@ document.addEventListener('DOMContentLoaded', () =>{
                     const carritoInnerHTML = carrito.innerHTML;
                     localStorage.setItem(carritoKey, carritoInnerHTML);
 
+                    cantidadCarrito++;
+                    if (cantidadCarrito == 0) {
+                        cantidadCarritoHTML.style.display = 'none';
+                    } else {
+                        cantidadCarritoHTML.style.display = 'block';
+                        cantidadCarritoHTML.textContent = cantidadCarrito;
+                    }
+
                     // Actualizar el monto total
                     actualizarMontoTotal();
                     quitarElemento()
@@ -80,6 +98,14 @@ document.addEventListener('DOMContentLoaded', () =>{
                     // Actualizar el contenido del carrito en LocalStorage
                     const carritoInnerHTML = carrito.innerHTML;
                     localStorage.setItem(carritoKey, carritoInnerHTML);
+
+                    cantidadCarrito--;
+                    if (cantidadCarrito == 0) {
+                        cantidadCarritoHTML.style.display = 'none';
+                    } else {
+                        cantidadCarritoHTML.style.display = 'block';
+                        cantidadCarritoHTML.textContent = cantidadCarrito;
+                    }
 
                     // Actualizar el monto total
                     actualizarMontoTotal();
