@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Actualizar el contenido del carrito en LocalStorage
                     const carritoInnerHTML = carrito.innerHTML;
                     localStorage.setItem(carritoKey, carritoInnerHTML);
-                    cantidadCarrito--;
+                    cantidadCarrito = carrito.children.length;
                     if (cantidadCarrito == 0) {
                         cantidadCarritoHTML.style.display = 'none';
                     } else {
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     `;
                     carrito.appendChild(libroCarrito);
                     alert(`Producto añadido al carrito correctamente`);
-                    cantidadCarrito++;
+                    cantidadCarrito = carrito.children.length;
                     if (cantidadCarrito == 0) {
                         cantidadCarritoHTML.style.display = 'none';
                     } else {

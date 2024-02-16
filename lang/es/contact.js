@@ -5,6 +5,15 @@ document.addEventListener('DOMContentLoaded', () =>{
     const carrito = document.getElementById('carrito');
     const montoActual = document.getElementById('montoActual');
     carrito.innerHTML = carritoHTML;
+    let cantidadCarrito = carrito.children.length;
+    const cantidadCarritoHTML = document.querySelector('.cantidadCarrito');
+    console.log(cantidadCarritoHTML);
+    if (cantidadCarrito == 0) {
+        cantidadCarritoHTML.style.display = 'none';
+    } else {
+        cantidadCarritoHTML.style.display = 'block';
+        cantidadCarritoHTML.textContent = cantidadCarrito;
+    }
     const botonModal = document.getElementById('botonModal');
     // Actualizar el monto total
     actualizarMontoTotal();
@@ -44,19 +53,25 @@ document.addEventListener('DOMContentLoaded', () =>{
     } 
     function quitarElemento() {
         const removeFromCartButtons = document.querySelectorAll('.removeFromCart');
-            removeFromCartButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    console.log('hola');
-                    const libroCarrito = button.closest('.border'); // Obtener el elemento padre .border
-                    libroCarrito.remove();
-                    
-                    // Actualizar el contenido del carrito en LocalStorage
-                    const carritoInnerHTML = carrito.innerHTML;
-                    localStorage.setItem(carritoKey, carritoInnerHTML);
-
-                    // Actualizar el monto total
-                    actualizarMontoTotal();
+        removeFromCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const libroCarrito = button.closest('.border'); // Obtener el elemento padre .border
+                libroCarrito.remove();
+                // Actualizar el contenido del carrito en LocalStorage
+                const carritoInnerHTML = carrito.innerHTML;
+                localStorage.setItem(carritoKey, carritoInnerHTML);
+    
+                cantidadCarrito = carrito.children.length;
+                if (cantidadCarrito == 0) {
+                    cantidadCarritoHTML.style.display = 'none';
+                } else {
+                    cantidadCarritoHTML.style.display = 'block';
+                    cantidadCarritoHTML.textContent = cantidadCarrito;
+                }
+                // Actualizar el monto total
+                actualizarMontoTotal();
+                
                 });
-    });
-    }
+            });
+    }  
 });

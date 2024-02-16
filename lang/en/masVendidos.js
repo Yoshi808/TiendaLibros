@@ -34,6 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Actualizar el contenido del carrito en LocalStorage
                     const carritoInnerHTML = carrito.innerHTML;
                     localStorage.setItem(carritoKey, carritoInnerHTML);
+                    cantidadCarrito = carrito.children.length;
+                    if (cantidadCarrito == 0) {
+                        cantidadCarritoHTML.style.display = 'none';
+                    } else {
+                        cantidadCarritoHTML.style.display = 'block';
+                        cantidadCarritoHTML.textContent = cantidadCarrito;
+                    }
                     // Actualizar el monto total
                     actualizarMontoTotal();
                 });
@@ -110,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     `;
                     carrito.appendChild(libroCarrito);
                     alert(`Product added to cart successfully`);
-                    cantidadCarrito++;
+                    cantidadCarrito = carrito.children.length;
                     if (cantidadCarrito == 0) {
                         cantidadCarritoHTML.style.display = 'none';
                     } else {

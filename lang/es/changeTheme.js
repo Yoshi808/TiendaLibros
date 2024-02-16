@@ -43,6 +43,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const themeButtons = document.querySelectorAll('[data-bs-theme-value]');
 
     themeButtons.forEach(button => {
+        const theme = button.getAttribute('data-bs-theme-value');
+
+        // Verifica si el tema actual del botón coincide con el tema guardado
+        if (theme === savedTheme) {
+            themeButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            button.classList.add('active');
+        }
+
         button.addEventListener('click', function() {
             themeButtons.forEach(btn => {
                 btn.classList.remove('active');

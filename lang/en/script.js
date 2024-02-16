@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const carritoInnerHTML = carrito.innerHTML;
                     localStorage.setItem(carritoKey, carritoInnerHTML);
 
-                    cantidadCarrito-=1;
+                    cantidadCarrito = carrito.children.length;
                     if (cantidadCarrito == 0) {
                         cantidadCarritoHTML.style.display = 'none';
                     } else {
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     carrito.appendChild(libroCarrito);
                     alert(`Product added to cart successfully`);
 
-                    cantidadCarrito++;
+                    cantidadCarrito = carrito.children.length;
                     if (cantidadCarrito == 0) {
                         cantidadCarritoHTML.style.display = 'none';
                     } else {

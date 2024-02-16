@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () =>{
                     libroCarrito.classList.add('d-flex');
                     libroCarrito.classList.add('flex-column');
                     libroCarrito.classList.add('align-items-center');
-                    l1
                     libroCarrito.innerHTML = `
                         <h3>${titulo}</h3>
                         <img src="${imagenSrc}">
@@ -63,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () =>{
                     const carritoInnerHTML = carrito.innerHTML;
                     localStorage.setItem(carritoKey, carritoInnerHTML);
 
-                    cantidadCarrito++;
+                    cantidadCarrito = carrito.children.length;
                     if (cantidadCarrito == 0) {
                         cantidadCarritoHTML.style.display = 'none';
                     } else {
@@ -99,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () =>{
                     const carritoInnerHTML = carrito.innerHTML;
                     localStorage.setItem(carritoKey, carritoInnerHTML);
 
-                    cantidadCarrito--;
+                    cantidadCarrito = carrito.children.length;
                     if (cantidadCarrito == 0) {
                         cantidadCarritoHTML.style.display = 'none';
                     } else {
