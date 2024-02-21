@@ -40,3 +40,10 @@ img{
         transform: scale(0.7);
     }
 }
+/* Estilos para posicionar el elemento en la esquina inferior derecha */
+.whatsapp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999; /* Asegura que esté encima de todo */
+}

@@ -22,7 +22,8 @@ main{
 
 .modal-open header,
 .modal-open main,
-.modal-open footer {
+.modal-open footer,
+.modal-open .whatsapp {
   -webkit-filter: blur(2px);
   -moz-filter: blur(2px);
   -o-filter: blur(2px);

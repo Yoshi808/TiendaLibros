@@ -12,7 +12,6 @@ main{
     grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
     gap: 2rem;
     padding: 5%;
-    margin-bottom: 30rem;
 }
 
 .cantidadCarrito{
@@ -53,7 +52,8 @@ main{
 
 .modal-open header,
 .modal-open main,
-.modal-open footer {
+.modal-open footer,
+.modal-open .whatsapp {
   -webkit-filter: blur(2px);
   -moz-filter: blur(2px);
   -o-filter: blur(2px);
@@ -85,4 +85,11 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+/* Estilos para posicionar el elemento en la esquina inferior derecha */
+.whatsapp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999; /* Asegura que esté encima de todo */
 }

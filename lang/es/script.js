@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 libros.appendChild(listaLibros);
             });
             const addToCartButtons = document.querySelectorAll('.addToCart');
+            console.log(addToCartButtons);
             addToCartButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const libro = button.closest('.libroInfo'); // Obtener el elemento padre .libroInfo
