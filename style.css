@@ -47,3 +47,7 @@ img{
     right: 20px;
     z-index: 9999; /* Asegura que esté encima de todo */
 }
+
+.whatsapp a img {
+    width: 5rem;
+}
