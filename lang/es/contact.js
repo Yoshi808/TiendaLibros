@@ -4,7 +4,11 @@ document.addEventListener('DOMContentLoaded', () =>{
     const carritoHTML = localStorage.getItem(carritoKey);
     const carrito = document.getElementById('carrito');
     const montoActual = document.getElementById('montoActual');
-    carrito.innerHTML = carritoHTML;
+    if (carritoHTML){
+        carrito.innerHTML = carritoHTML;
+    } else {
+        carrito.innerHTML = 'El carrito está vacío...'
+    }
     let cantidadCarrito = carrito.children.length;
     const cantidadCarritoHTML = document.querySelector('.cantidadCarrito');
     console.log(cantidadCarritoHTML);
