@@ -50,7 +50,13 @@ document.addEventListener('DOMContentLoaded', () =>{
             total += parseFloat(precioTexto); // Sumar el precio al total
         });
         montoActual.textContent = `Monto Actual: S/${total.toFixed(2)}`; // Mostrar el total en el elemento 'montoActual'
+        localStorage.setItem('montoTotal', total.toFixed(2)); // Guardar el monto total en el LocalStorage
     } 
+    const deleteAll = document.getElementById('deleteAll');
+    deleteAll.addEventListener('click', quitarTodo);
+    botonModal.addEventListener('click', quitarElemento);
+    
+
     function quitarElemento() {
         const removeFromCartButtons = document.querySelectorAll('.removeFromCart');
         removeFromCartButtons.forEach(button => {
@@ -73,5 +79,22 @@ document.addEventListener('DOMContentLoaded', () =>{
                 
                 });
             });
-    }  
+    } 
+
+    function quitarTodo() {
+        carrito.innerHTML = '';
+        cantidadCarrito = carrito.children.length;
+                if (cantidadCarrito == 0) {
+                    cantidadCarritoHTML.style.display = 'none';
+                } else {
+                    cantidadCarritoHTML.style.display = 'block';
+                    cantidadCarritoHTML.textContent = cantidadCarrito;
+                }
+        // Actualizar el monto total
+        actualizarMontoTotal();
+        // Actualizar el contenido del carrito en LocalStorage
+        const carritoInnerHTML = carrito.innerHTML;
+        localStorage.setItem(carritoKey, carritoInnerHTML);
+    }
+
 });

@@ -32,7 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Actualizar el monto total
     actualizarMontoTotal();
 
-    botonModal.addEventListener('click', quitarElemento());
+    const deleteAll = document.getElementById('deleteAll');
+    deleteAll.addEventListener('click', quitarTodo);
+    botonModal.addEventListener('click', quitarElemento);
     
 
     function quitarElemento() {
@@ -57,7 +59,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 });
             });
-    }  
+    } 
+
+    function quitarTodo() {
+        carrito.innerHTML = '';
+        cantidadCarrito = carrito.children.length;
+                if (cantidadCarrito == 0) {
+                    cantidadCarritoHTML.style.display = 'none';
+                } else {
+                    cantidadCarritoHTML.style.display = 'block';
+                    cantidadCarritoHTML.textContent = cantidadCarrito;
+                }
+        // Actualizar el monto total
+        actualizarMontoTotal();
+        // Actualizar el contenido del carrito en LocalStorage
+        const carritoInnerHTML = carrito.innerHTML;
+        localStorage.setItem(carritoKey, carritoInnerHTML);
+    }
 
     function getBooks(valor) {
         fetch(`https://www.googleapis.com/books/v1/volumes?q=${valor}&maxResults=${maxResults}&langRestrict=es`)
@@ -171,5 +189,6 @@ document.addEventListener('DOMContentLoaded', () => {
             total += parseFloat(precioTexto); // Sumar el precio al total
         });
         montoActual.textContent = `Monto Actual: S/${total.toFixed(2)}`; // Mostrar el total en el elemento 'montoActual'
+        localStorage.setItem('montoTotal', total.toFixed(2)); // Guardar el monto total en el LocalStorage
     }
 })

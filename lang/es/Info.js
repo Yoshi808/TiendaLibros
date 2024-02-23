@@ -85,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () =>{
             total += parseFloat(precioTexto); // Sumar el precio al total
         });
         montoActual.textContent = `Monto Actual: S/${total.toFixed(2)}`; // Mostrar el total en el elemento 'montoActual'
+        localStorage.setItem('montoTotal', total.toFixed(2)); // Guardar el monto total en el LocalStorage
     } 
     function quitarElemento() {
         const removeFromCartButtons = document.querySelectorAll('.removeFromCart');

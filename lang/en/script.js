@@ -34,32 +34,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
     botonModal.addEventListener('click', quitarElemento());
     
+    const deleteAll = document.getElementById('deleteAll');
+    deleteAll.addEventListener('click', quitarTodo);
+    botonModal.addEventListener('click', quitarElemento);
+    
 
     function quitarElemento() {
         const removeFromCartButtons = document.querySelectorAll('.removeFromCart');
-            removeFromCartButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    console.log('hola');
-                    const libroCarrito = button.closest('.border'); // Obtener el elemento padre .border
-                    libroCarrito.remove();
-                    
-                    // Actualizar el contenido del carrito en LocalStorage
-                    const carritoInnerHTML = carrito.innerHTML;
-                    localStorage.setItem(carritoKey, carritoInnerHTML);
-
-                    cantidadCarrito = carrito.children.length;
-                    if (cantidadCarrito == 0) {
-                        cantidadCarritoHTML.style.display = 'none';
-                    } else {
-                        cantidadCarritoHTML.style.display = 'block';
-                        cantidadCarritoHTML.textContent = cantidadCarrito;
-                    }
-
-                    // Actualizar el monto total
-                    actualizarMontoTotal();
+        removeFromCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const libroCarrito = button.closest('.border'); // Obtener el elemento padre .border
+                libroCarrito.remove();
+                // Actualizar el contenido del carrito en LocalStorage
+                const carritoInnerHTML = carrito.innerHTML;
+                localStorage.setItem(carritoKey, carritoInnerHTML);
+    
+                cantidadCarrito = carrito.children.length;
+                if (cantidadCarrito == 0) {
+                    cantidadCarritoHTML.style.display = 'none';
+                } else {
+                    cantidadCarritoHTML.style.display = 'block';
+                    cantidadCarritoHTML.textContent = cantidadCarrito;
+                }
+                // Actualizar el monto total
+                actualizarMontoTotal();
+                
                 });
-    });
+            });
+    } 
+
+    function quitarTodo() {
+        carrito.innerHTML = '';
+        cantidadCarrito = carrito.children.length;
+                if (cantidadCarrito == 0) {
+                    cantidadCarritoHTML.style.display = 'none';
+                } else {
+                    cantidadCarritoHTML.style.display = 'block';
+                    cantidadCarritoHTML.textContent = cantidadCarrito;
+                }
+        // Actualizar el monto total
+        actualizarMontoTotal();
+        // Actualizar el contenido del carrito en LocalStorage
+        const carritoInnerHTML = carrito.innerHTML;
+        localStorage.setItem(carritoKey, carritoInnerHTML);
     }
+
 
     function getBooks(valor) {
         fetch(`https://www.googleapis.com/books/v1/volumes?q=${valor}&maxResults=${maxResults}&langRestrict=en`)
@@ -173,6 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const precioTexto = precio.textContent.replace('Price: S/', ''); // Eliminar el texto 'Precio: S/' para obtener solo el número
             total += parseFloat(precioTexto); // Sumar el precio al total
         });
-        montoActual.textContent = `Current Amount S/${total.toFixed(2)}`; // Mostrar el total en el elemento 'montoActual'
+        montoActual.textContent = `Current Amount: S/${total.toFixed(2)}`; // Mostrar el total en el elemento 'montoActual'
+        localStorage.setItem('montoTotal', total.toFixed(2)); // Guardar el monto total en el LocalStorage
     }
 })
