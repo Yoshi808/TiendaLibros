@@ -1,146 +1,186 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Definimos las constantes para las claves en LocalStorage
-    const carritoKey = "Carrito";   
-    const carritoHTML = localStorage.getItem(carritoKey);
-    const libros = document.getElementById('libros');
-    const carrito = document.getElementById('carrito');
-    const montoActual = document.getElementById('montoActual');
-    carrito.innerHTML = carritoHTML;
-    let cantidadCarrito = carrito.children.length;
-    const cantidadCarritoHTML = document.querySelector('.cantidadCarrito');
-    console.log(cantidadCarritoHTML);
-    if (cantidadCarrito == 0) {
-        cantidadCarritoHTML.style.display = 'none';
-    } else {
-        cantidadCarritoHTML.style.display = 'block';
-        cantidadCarritoHTML.textContent = cantidadCarrito;
-    }
-    console.log(cantidadCarrito);
-    const searchForm = document.getElementById('searchForm');
-    const genero = document.getElementById('genero');
-    searchForm.addEventListener('submit', (event) => {
-        const input = document.getElementById('busqueda');
-        event.preventDefault();
-        const busqueda = input.value.trim();
-        genero.textContent = `${busqueda} (Click en las imágenes de los libros para ver su descripción):`
-        libros.innerHTML = '';
-        getBooks(busqueda);
-    })
-    
-    const maxResults = 20;
-    const botonModal = document.getElementById('botonModal');
-    // Actualizar el monto total
-    actualizarMontoTotal();
+document.addEventListener("DOMContentLoaded", () => {
+  // Definimos las constantes para las claves en LocalStorage
+  const carritoKey = "Carrito";
+  const carritoHTML = localStorage.getItem(carritoKey);
+  const libros = document.getElementById("libros");
+  const carrito = document.getElementById("carrito");
+  const montoActual = document.getElementById("montoActual");
+  carrito.innerHTML = carritoHTML;
+  let cantidadCarrito = carrito.children.length;
+  const cantidadCarritoHTML = document.querySelector(".cantidadCarrito");
+  console.log(cantidadCarritoHTML);
+  if (cantidadCarrito == 0) {
+    cantidadCarritoHTML.style.display = "none";
+  } else {
+    cantidadCarritoHTML.style.display = "block";
+    cantidadCarritoHTML.textContent = cantidadCarrito;
+  }
+  console.log(cantidadCarrito);
+  const searchForm = document.getElementById("searchForm");
+  const genero = document.getElementById("genero");
+  searchForm.addEventListener("submit", (event) => {
+    const input = document.getElementById("busqueda");
+    event.preventDefault();
+    const busqueda = input.value.trim();
+    genero.textContent = `${busqueda} (Click en las imágenes de los libros para ver su descripción):`;
+    libros.innerHTML = "";
+    getBooks(busqueda);
+  });
 
-    const deleteAll = document.getElementById('deleteAll');
-    deleteAll.addEventListener('click', quitarTodo);
-    botonModal.addEventListener('click', quitarElemento);
-    
+  const maxResults = 20;
+  const botonModal = document.getElementById("botonModal");
+  // Actualizar el monto total
+  actualizarMontoTotal();
 
-    function quitarElemento() {
-        const removeFromCartButtons = document.querySelectorAll('.removeFromCart');
-        removeFromCartButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const libroCarrito = button.closest('.border'); // Obtener el elemento padre .border
-                libroCarrito.remove();
-                // Actualizar el contenido del carrito en LocalStorage
-                const carritoInnerHTML = carrito.innerHTML;
-                localStorage.setItem(carritoKey, carritoInnerHTML);
-    
-                cantidadCarrito = carrito.children.length;
-                if (cantidadCarrito == 0) {
-                    cantidadCarritoHTML.style.display = 'none';
-                } else {
-                    cantidadCarritoHTML.style.display = 'block';
-                    cantidadCarritoHTML.textContent = cantidadCarrito;
-                }
-                // Actualizar el monto total
-                actualizarMontoTotal();
-                
-                });
-            });
-    } 
+  const deleteAll = document.getElementById("deleteAll");
+  deleteAll.addEventListener("click", quitarTodo);
+  botonModal.addEventListener("click", quitarElemento);
 
-    function quitarTodo() {
-        carrito.innerHTML = '';
-        cantidadCarrito = carrito.children.length;
-                if (cantidadCarrito == 0) {
-                    cantidadCarritoHTML.style.display = 'none';
-                } else {
-                    cantidadCarritoHTML.style.display = 'block';
-                    cantidadCarritoHTML.textContent = cantidadCarrito;
-                }
-        // Actualizar el monto total
-        actualizarMontoTotal();
+  function quitarElemento() {
+    const removeFromCartButtons = document.querySelectorAll(".removeFromCart");
+    removeFromCartButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const libroCarrito = button.closest(".border"); // Obtener el elemento padre .border
+        libroCarrito.remove();
         // Actualizar el contenido del carrito en LocalStorage
         const carritoInnerHTML = carrito.innerHTML;
         localStorage.setItem(carritoKey, carritoInnerHTML);
+
+        cantidadCarrito = carrito.children.length;
+        if (cantidadCarrito == 0) {
+          cantidadCarritoHTML.style.display = "none";
+        } else {
+          cantidadCarritoHTML.style.display = "block";
+          cantidadCarritoHTML.textContent = cantidadCarrito;
+        }
+        // Actualizar el monto total
+        actualizarMontoTotal();
+      });
+    });
+  }
+
+  function quitarTodo() {
+    carrito.innerHTML = "";
+    cantidadCarrito = carrito.children.length;
+    if (cantidadCarrito == 0) {
+      cantidadCarritoHTML.style.display = "none";
+    } else {
+      cantidadCarritoHTML.style.display = "block";
+      cantidadCarritoHTML.textContent = cantidadCarrito;
     }
+    // Actualizar el monto total
+    actualizarMontoTotal();
+    // Actualizar el contenido del carrito en LocalStorage
+    const carritoInnerHTML = carrito.innerHTML;
+    localStorage.setItem(carritoKey, carritoInnerHTML);
+  }
 
-    function getBooks(valor) {
-        fetch(`https://www.googleapis.com/books/v1/volumes?q=${valor}&maxResults=${maxResults}&langRestrict=es`)
-        .then(response => response.json())
-        .then(data => {
-
-            data.items.forEach(libro => {
-                const listaLibros = document.createElement('div');
-                listaLibros.classList.add('libroInfo');
-                listaLibros.classList.add('border');
-                listaLibros.classList.add('border-3');
-                listaLibros.classList.add('border-secondary');
-                listaLibros.classList.add('rounded');
-                listaLibros.classList.add('shadow');
-                listaLibros.innerHTML = libro.saleInfo.listPrice ? `
+  function getBooks(valor) {
+    fetch(
+      `https://www.googleapis.com/books/v1/volumes?q=${valor}&maxResults=${maxResults}&langRestrict=es`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        data.items.forEach((libro) => {
+          const listaLibros = document.createElement("div");
+          listaLibros.classList.add("libroInfo");
+          listaLibros.classList.add("border");
+          listaLibros.classList.add("border-3");
+          listaLibros.classList.add("border-secondary");
+          listaLibros.classList.add("rounded");
+          listaLibros.classList.add("shadow");
+          listaLibros.innerHTML = libro.saleInfo.listPrice
+            ? `
                     <h3 class="titulo">${libro.volumeInfo.title}</h3>
-                    <a class="imageLink" href="info.html"><img src="${libro.volumeInfo.imageLinks ? libro.volumeInfo.imageLinks.thumbnail : 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTMVlVIwSSng1xnNT7GR_c91cjMKxlfVhwFuo_Z-tUw2en6u5Rg'}"></a>
-                    <h4>Autores: ${libro.volumeInfo.authors ? libro.volumeInfo.authors : 'Desconocidos'} (${libro.volumeInfo.publishedDate ? libro.volumeInfo.publishedDate : 'Fecha desconocida'})</h4>
-                    ${libro.volumeInfo.description || libro.volumeInfo.subtitle ? `<p class="description"><strong>Descripción: </strong>${libro.volumeInfo.description || libro.volumeInfo.subtitle}</p>` : ''}
+                    <a class="imageLink" href="info.html"><img src="${
+                      libro.volumeInfo.imageLinks
+                        ? libro.volumeInfo.imageLinks.thumbnail
+                        : "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTMVlVIwSSng1xnNT7GR_c91cjMKxlfVhwFuo_Z-tUw2en6u5Rg"
+                    }"></a>
+                    <h4>Autores: ${
+                      libro.volumeInfo.authors
+                        ? libro.volumeInfo.authors
+                        : "Desconocidos"
+                    } (${
+                libro.volumeInfo.publishedDate
+                  ? libro.volumeInfo.publishedDate
+                  : "Fecha desconocida"
+              })</h4>
+                    ${
+                      libro.volumeInfo.description || libro.volumeInfo.subtitle
+                        ? `<p class="description"><strong>Descripción: </strong>${
+                            libro.volumeInfo.description ||
+                            libro.volumeInfo.subtitle
+                          }</p>`
+                        : ""
+                    }
                     <div class="venta">
-                    <h5 style="margin: 10%">Precio: S/${libro.saleInfo.listPrice.amount}</h5>
+                    <h5 style="margin: 10%">Precio: S/${
+                      libro.saleInfo.listPrice.amount
+                    }</h5>
                         <button class="btn btn-outline-success addToCart" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16"> <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z"/> <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg> Añadir al carrito</button>
                     </div>
-                    ` : `
+                    `
+            : `
                     <h3 class="titulo">${libro.volumeInfo.title}</h3>
-                    <a class="imageLink" href="info.html"><img src="${libro.volumeInfo.imageLinks ? libro.volumeInfo.imageLinks.thumbnail : 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTMVlVIwSSng1xnNT7GR_c91cjMKxlfVhwFuo_Z-tUw2en6u5Rg'}"></a>
-                    <h4>Autores: ${libro.volumeInfo.authors ? libro.volumeInfo.authors : 'Desconocidos'} (${libro.volumeInfo.publishedDate ? libro.volumeInfo.publishedDate : 'Fecha desconocida'})</h4>
-                    ${libro.volumeInfo.description || libro.volumeInfo.subtitle ? `<p style="display: none"><strong>Descripción: </strong>${libro.volumeInfo.description || libro.volumeInfo.subtitle}</p>` : ''}
+                    <a class="imageLink" href="info.html"><img src="${
+                      libro.volumeInfo.imageLinks
+                        ? libro.volumeInfo.imageLinks.thumbnail
+                        : "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTMVlVIwSSng1xnNT7GR_c91cjMKxlfVhwFuo_Z-tUw2en6u5Rg"
+                    }"></a>
+                    <h4>Autores: ${
+                      libro.volumeInfo.authors
+                        ? libro.volumeInfo.authors
+                        : "Desconocidos"
+                    } (${
+                libro.volumeInfo.publishedDate
+                  ? libro.volumeInfo.publishedDate
+                  : "Fecha desconocida"
+              })</h4>
+                    ${
+                      libro.volumeInfo.description || libro.volumeInfo.subtitle
+                        ? `<p style="display: none"><strong>Descripción: </strong>${
+                            libro.volumeInfo.description ||
+                            libro.volumeInfo.subtitle
+                          }</p>`
+                        : ""
+                    }
                     <div class="venta">
                     <h5 style="margin: 10%">Agotado</h5>
                         <button class="btn btn-danger addToCart" disabled  type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16"> <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z"/> <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg> Añadir al carrito</button>
                     </div>
                 `;
-                const imageLink = document.querySelectorAll('.imageLink');
-                imageLink.forEach(image => {
-                    image.addEventListener('click', () => {
-                        const libro = image.closest('.libroInfo');
-                        localStorage.setItem('Info', libro.innerHTML);
-                    });
-                });
-                
-                
-                libros.appendChild(listaLibros);
+          const imageLink = document.querySelectorAll(".imageLink");
+          imageLink.forEach((image) => {
+            image.addEventListener("click", () => {
+              const libro = image.closest(".libroInfo");
+              localStorage.setItem("Info", libro.innerHTML);
             });
-            const addToCartButtons = document.querySelectorAll('.addToCart');
-            console.log(addToCartButtons);
-            addToCartButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const libro = button.closest('.libroInfo'); // Obtener el elemento padre .libroInfo
-                    const titulo = libro.querySelector('h3').textContent;
-                    const imagenSrc = libro.querySelector('img').src;
-                    const precio = libro.querySelector('h5').textContent;
-                    
-                    const libroCarrito = document.createElement('div');
-                    libroCarrito.classList.add('border');
-                    libroCarrito.classList.add('border-3');
-                    libroCarrito.classList.add('border-secondary');
-                    libroCarrito.classList.add('p-3');
-                    libroCarrito.classList.add('m-3');
-                    libroCarrito.classList.add('d-flex');
-                    libroCarrito.classList.add('flex-column');
-                    libroCarrito.classList.add('align-items-center');
-                    libroCarrito.classList.add('rounded');
-                    libroCarrito.classList.add('shadow');
-                    libroCarrito.innerHTML = `
+          });
+
+          libros.appendChild(listaLibros);
+        });
+        const addToCartButtons = document.querySelectorAll(".addToCart");
+        console.log(addToCartButtons);
+        addToCartButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const libro = button.closest(".libroInfo"); // Obtener el elemento padre .libroInfo
+            const titulo = libro.querySelector("h3").textContent;
+            const imagenSrc = libro.querySelector("img").src;
+            const precio = libro.querySelector("h5").textContent;
+
+            const libroCarrito = document.createElement("div");
+            libroCarrito.classList.add("border");
+            libroCarrito.classList.add("border-3");
+            libroCarrito.classList.add("border-secondary");
+            libroCarrito.classList.add("p-3");
+            libroCarrito.classList.add("m-3");
+            libroCarrito.classList.add("d-flex");
+            libroCarrito.classList.add("flex-column");
+            libroCarrito.classList.add("align-items-center");
+            libroCarrito.classList.add("rounded");
+            libroCarrito.classList.add("shadow");
+            libroCarrito.innerHTML = `
                         <h3 class="titulo">${titulo}</h3>
                         <img src="${imagenSrc}">
                         <h5 style="margin: 10%">${precio}</h5>
@@ -151,44 +191,43 @@ document.addEventListener('DOMContentLoaded', () => {
                         Quitar del carrito
                         </button>
                     `;
-                    carrito.appendChild(libroCarrito);
-                    alert(`Producto añadido al carrito correctamente`);
-                    cantidadCarrito = carrito.children.length;
-                    if (cantidadCarrito == 0) {
-                        cantidadCarritoHTML.style.display = 'none';
-                    } else {
-                        cantidadCarritoHTML.style.display = 'block';
-                        cantidadCarritoHTML.textContent = cantidadCarrito;
-                    }
-                    // Guardamos un valor en LocalStorage
-                    const carritoInnerHTML = carrito.innerHTML;
-                    localStorage.setItem(carritoKey, carritoInnerHTML);
+            carrito.appendChild(libroCarrito);
+            alert(`Producto añadido al carrito correctamente`);
+            cantidadCarrito = carrito.children.length;
+            if (cantidadCarrito == 0) {
+              cantidadCarritoHTML.style.display = "none";
+            } else {
+              cantidadCarritoHTML.style.display = "block";
+              cantidadCarritoHTML.textContent = cantidadCarrito;
+            }
+            // Guardamos un valor en LocalStorage
+            const carritoInnerHTML = carrito.innerHTML;
+            localStorage.setItem(carritoKey, carritoInnerHTML);
 
-                    // Actualizar el monto total
-                    actualizarMontoTotal();
-                    quitarElemento()
-                });
-            });
-
-            // Actualizar el monto total al cargar los libros
+            // Actualizar el monto total
             actualizarMontoTotal();
-
-        })
-        .catch(error => {
-            libros.innerHTML = `Error: ${error}`
-            console.error('Error: ', error);
+            quitarElemento();
+          });
         });
-    }
 
-    // Función para actualizar el monto total
-    function actualizarMontoTotal() {
-        const precios = document.querySelectorAll('#carrito .border h5'); // Obtener todos los precios de los libros en el carrito
-        let total = 0;
-        precios.forEach(precio => {
-            const precioTexto = precio.textContent.replace('Precio: S/', ''); // Eliminar el texto 'Precio: S/' para obtener solo el número
-            total += parseFloat(precioTexto); // Sumar el precio al total
-        });
-        montoActual.textContent = `Monto Actual: S/${total.toFixed(2)}`; // Mostrar el total en el elemento 'montoActual'
-        localStorage.setItem('montoTotal', total.toFixed(2)); // Guardar el monto total en el LocalStorage
-    }
-})
+        // Actualizar el monto total al cargar los libros
+        actualizarMontoTotal();
+      })
+      .catch((error) => {
+        libros.innerHTML = `Error: ${error}`;
+        console.error("Error: ", error);
+      });
+  }
+
+  // Función para actualizar el monto total
+  function actualizarMontoTotal() {
+    const precios = document.querySelectorAll("#carrito .border h5"); // Obtener todos los precios de los libros en el carrito
+    let total = 0;
+    precios.forEach((precio) => {
+      const precioTexto = precio.textContent.replace("Precio: S/", ""); // Eliminar el texto 'Precio: S/' para obtener solo el número
+      total += parseFloat(precioTexto); // Sumar el precio al total
+    });
+    montoActual.textContent = `Monto Actual: S/${total.toFixed(2)}`; // Mostrar el total en el elemento 'montoActual'
+    localStorage.setItem("montoTotal", total.toFixed(2)); // Guardar el monto total en el LocalStorage
+  }
+});

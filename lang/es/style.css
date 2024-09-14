@@ -54,16 +54,15 @@ main{
     display: none;
 }
 
-
 .modal-open header,
 .modal-open main,
 .modal-open footer,
 .modal-open .whatsapp {
-  -webkit-filter: blur(2px);
-  -moz-filter: blur(2px);
-  -o-filter: blur(2px);
-  -ms-filter: blur(2px);
-  filter: blur(2px);
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
 }
 
 @media (max-width: 1000px) {
